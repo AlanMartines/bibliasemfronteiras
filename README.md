@@ -1,6 +1,3 @@
-Claro! Aqui está um **README.md** em texto puro, pronto para colar no seu repositório GitHub:
-
-```markdown
 # 📖 Bíblia Online (JSON)
 
 Este projeto reúne diferentes traduções da **Bíblia em Português Brasileiro** em formato **JSON**, oferecendo uma interface web simples, responsiva e elegante (com **Bootstrap 4**) para leitura e navegação por **testamentos, livros, capítulos e versículos**.
@@ -16,7 +13,7 @@ Este projeto reúne diferentes traduções da **Bíblia em Português Brasileiro
 
 ## 📂 Estrutura do Projeto
 
-```
+```sh
 /
 ├── avemaria/
 │   └── bibliaAveMaria.json
@@ -26,8 +23,8 @@ Este projeto reúne diferentes traduções da **Bíblia em Português Brasileiro
 │   └── aa.json
 ├── novaversaointernacional/
 │   └── nvi.json
-└── index.html   ← página inicial com seleção das versões
-````
+└── index.html  ← página inicial com seleção das versões
+```
 
 Cada pasta contém os arquivos JSON correspondentes e a interface de leitura (HTML/JS).
 
@@ -58,8 +55,8 @@ Um agradecimento especial aos criadores e mantenedores dos repositórios que dis
 ## 💡 Como usar
 
 1. Faça o clone do repositório:
-   ```bash
-   git clone https://github.com/seu-usuario/biblia-online.git
+```sh
+   git clone https://github.com/AlanMartines/bibliasemfronteiras.git
 ````
 
 2. Abra o arquivo `index.html` diretamente no navegador **ou** sirva o projeto em um servidor local (por exemplo: `Live Server` no VSCode).
@@ -74,5 +71,3 @@ O código da interface está sob a licença **MIT**, livre para uso e modificaç
 ---
 
 ✝️ Projeto para estudos, devocional e aprendizado de tecnologias web.
-
-```
