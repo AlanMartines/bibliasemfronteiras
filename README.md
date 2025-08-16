@@ -1,4 +1,4 @@
-# 📖 Bíblia Online (JSON)
+# 📖 Bíblia Online
 
 Este projeto reúne diferentes traduções da **Bíblia em Português Brasileiro** em formato **JSON**, oferecendo uma interface web simples, responsiva e elegante (com **Bootstrap 4**) para leitura e navegação por **testamentos, livros, capítulos e versículos**.
 
@@ -71,7 +71,3 @@ Um agradecimento especial aos criadores e mantenedores dos repositórios que dis
 
 Os textos bíblicos em JSON pertencem aos respectivos autores dos repositórios citados em **Créditos & Referências**.
 O código da interface está sob a licença **MIT**, livre para uso e modificação.
-
----
-
-✝️ Projeto para estudos, devocional e aprendizado de tecnologias web.
