@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <title>Bíblia Online — Versões</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap 4 -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <!-- Tipografia e pequenos toques -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f7f9fc; --text:#1f2d3d; --muted:#6c757d; --accent:#0d6efd;
+    }
+    body{ font-family: "Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif; color:var(--text); background:var(--bg); }
+    .navbar{ box-shadow: 0 6px 20px rgba(0,0,0,.05); }
+    .hero{
+      background: linear-gradient(135deg, #0d6efd 0%, #20c997 100%);
+      color:#fff; border-radius: 1rem; padding: 2.25rem;
+    }
+    .hero h1{ font-weight: 700; letter-spacing:.2px; }
+    .version-card{
+      border: none; border-radius: 1rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,.06);
+      transition: transform .15s ease, box-shadow .15s ease;
+      height: 100%;
+    }
+    .version-card:hover{ transform: translateY(-2px); box-shadow: 0 14px 40px rgba(0,0,0,.10); }
+    .version-card .card-body{ padding: 1.25rem 1.25rem 1rem; }
+    .badge-pill{ font-weight:600; }
+    .footer{ color:var(--muted); }
+    .credit-link{ color: inherit; text-decoration: none; border-bottom: 1px dotted rgba(0,0,0,.2); }
+    .credit-link:hover{ text-decoration: none; border-bottom-color: transparent; }
+    /* Acessibilidade do foco */
+    a:focus, button:focus{ outline: 3px solid rgba(13,110,253,.35) !important; outline-offset: 2px; }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-md navbar-light bg-white">
+    <div class="container">
+      <a class="navbar-brand font-weight-bold" href="./">📖 Bíblia Online</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Alternar navegação">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div id="nav" class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a class="nav-link" href="#versoes">Versões</a></li>
+          <li class="nav-item"><a class="nav-link" href="#sobre">Sobre</a></li>
+          <li class="nav-item"><a class="nav-link" href="#creditos">Créditos</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <main class="container my-4">
+    <section class="hero mb-4">
+      <div class="row align-items-center">
+        <div class="col-lg-8">
+          <h1 class="mb-2">Escolha a versão da Bíblia</h1>
+          <p class="lead mb-0">Acesse rapidamente sua tradução favorita. Interface simples, responsiva e agradável.</p>
+        </div>
+        <div class="col-lg-4 mt-3 mt-lg-0 text-lg-right">
+          <span class="badge badge-light badge-pill mr-2 mb-2">Desktop</span>
+          <span class="badge badge-light badge-pill mr-2 mb-2">Tablet</span>
+          <span class="badge badge-light badge-pill mb-2">Celular</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cards de versões -->
+    <section id="versoes" class="mb-4">
+      <div class="row">
+        <!-- NVI -->
+        <div class="col-md-6 col-lg-3 mb-4 d-flex">
+          <div class="card version-card w-100">
+            <div class="card-body">
+              <h5 class="card-title mb-1">Nova Versão Internacional</h5>
+              <p class="text-muted mb-3">NVI • linguagem contemporânea, clara e fiel aos originais.</p>
+              <a href="novaversaointernacional/" class="btn btn-primary btn-block" aria-label="Abrir Nova Versão Internacional">
+                Acessar NVI
+              </a>
+              <p class="small text-muted mt-3 mb-0">
+                Fonte: <a class="credit-link" href="https://github.com/thiagobodruk/biblia" target="_blank" rel="noopener noreferrer">thiagobodruk/biblia</a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ACF -->
+        <div class="col-md-6 col-lg-3 mb-4 d-flex">
+          <div class="card version-card w-100">
+            <div class="card-body">
+              <h5 class="card-title mb-1">Almeida Corrigida e Fiel</h5>
+              <p class="text-muted mb-3">ACF • revisão tradicional com linguagem reverente e precisa.</p>
+              <a href="almeidacorrigidafiel/" class="btn btn-primary btn-block" aria-label="Abrir Almeida Corrigida e Fiel">
+                Acessar ACF
+              </a>
+              <p class="small text-muted mt-3 mb-0">
+                Fonte: <a class="credit-link" href="https://github.com/thiagobodruk/biblia" target="_blank" rel="noopener noreferrer">thiagobodruk/biblia</a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- AA (Imprensa Bíblica) -->
+        <div class="col-md-6 col-lg-3 mb-4 d-flex">
+          <div class="card version-card w-100">
+            <div class="card-body">
+              <h5 class="card-title mb-1">Almeida Revisada (Imprensa Bíblica)</h5>
+              <p class="text-muted mb-3">AA • revisão clássica usada por gerações de leitores.</p>
+              <a href="almeidarevisadaimprensabiblica/" class="btn btn-primary btn-block" aria-label="Abrir Almeida Revisada Imprensa Bíblica">
+                Acessar AA
+              </a>
+              <p class="small text-muted mt-3 mb-0">
+                Fonte: <a class="credit-link" href="https://github.com/thiagobodruk/biblia" target="_blank" rel="noopener noreferrer">thiagobodruk/biblia</a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ave Maria -->
+        <div class="col-md-6 col-lg-3 mb-4 d-flex">
+          <div class="card version-card w-100">
+            <div class="card-body">
+              <h5 class="card-title mb-1">Ave Maria</h5>
+              <p class="text-muted mb-3">Tradição católica com linguagem devocional e fluente.</p>
+              <a href="avemaria/" class="btn btn-primary btn-block" aria-label="Abrir Ave Maria">
+                Acessar Ave Maria
+              </a>
+              <p class="small text-muted mt-3 mb-0">
+                Fonte: <a class="credit-link" href="https://github.com/fidalgobr/bibliaAveMariaJSON" target="_blank" rel="noopener noreferrer">fidalgobr/bibliaAveMariaJSON</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lista compacta -->
+    <section class="mb-5">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body py-3">
+          <div class="d-flex flex-wrap align-items-center">
+            <span class="mr-3 mb-2 font-weight-bold">Atalhos rápidos:</span>
+            <a class="btn btn-outline-secondary btn-sm mr-2 mb-2" href="novaversaointernacional/">NVI</a>
+            <a class="btn btn-outline-secondary btn-sm mr-2 mb-2" href="almeidacorrigidafiel/">ACF</a>
+            <a class="btn btn-outline-secondary btn-sm mr-2 mb-2" href="almeidarevisadaimprensabiblica/">AA (IB)</a>
+            <a class="btn btn-outline-secondary btn-sm mb-2" href="avemaria/">Ave Maria</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sobre -->
+    <section id="sobre" class="mb-4">
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="card border-0 shadow-sm">
+            <div class="card-body">
+              <h5 class="mb-2">Sobre o projeto</h5>
+              <p class="mb-2 text-muted">
+                Esta página reúne links para diferentes traduções da Bíblia. O layout foi construído com
+                <strong>Bootstrap 4</strong>, focando em legibilidade, acessibilidade e rapidez.
+              </p>
+              <ul class="mb-0 text-muted">
+                <li>Compatível com desktop, notebook, tablets e celulares.</li>
+                <li>Navegação por teclado (foco visível em botões e links).</li>
+                <li>Design limpo com destaque para o conteúdo.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 mt-3 mt-lg-0">
+          <div class="card border-0 shadow-sm h-100">
+            <div class="card-body d-flex flex-column justify-content-center text-center">
+              <div class="mb-2">Precisa de outra tradução?</div>
+              <a href="#" class="btn btn-outline-primary disabled" tabindex="-1" aria-disabled="true">Em breve</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Créditos & Referências -->
+    <section id="creditos" class="mb-4">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body">
+          <h5 class="mb-3">Créditos & Referências</h5>
+          <p class="text-muted mb-3">Agradecimentos especiais aos autores e mantenedores dos repositórios que tornaram possível a disponibilização destas versões em JSON:</p>
+          <ul class="list-unstyled mb-0">
+            <li class="media mb-3">
+              <div class="media-body">
+                <strong>Thiago Bodruk</strong> — Repositório <a class="credit-link" href="https://github.com/thiagobodruk/biblia" target="_blank" rel="noopener noreferrer">thiagobodruk/biblia</a><br>
+                <small class="text-muted">Fornece as versões: NVI, ACF e AA (Imprensa Bíblica), em português do Brasil.</small>
+              </div>
+            </li>
+            <li class="media">
+              <div class="media-body">
+                <strong>Fidalgo</strong> — Repositório <a class="credit-link" href="https://github.com/fidalgobr/bibliaAveMariaJSON" target="_blank" rel="noopener noreferrer">fidalgobr/bibliaAveMariaJSON</a><br>
+                <small class="text-muted">Compilação da versão Ave Maria em JSON, contribuindo com a tradição católica.</small>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer class="footer text-center py-4">
+      <small>
+        © 2025 - <span id="year"></span> Bíblia Online • Os textos bíblicos e estruturas JSON pertencem aos respectivos autores e repositórios citados acima.
+      </small>
+    </footer>
+  </main>
+
+  <!-- JS Bootstrap 4 (depende de jQuery e Popper) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" crossorigin="anonymous"></script>
+  <script>
+    // Ano dinâmico no rodapé
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
