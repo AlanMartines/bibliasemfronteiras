@@ -17,12 +17,16 @@ Este projeto reúne diferentes traduções da **Bíblia em Português Brasileiro
 /
 ├── avemaria/
 │   └── bibliaAveMaria.json
+│   └── index.html
 ├── almeidacorrigidafiel/
 │   └── acf.json
+│   └── index.html
 ├── almeidarevisadaimprensabiblica/
 │   └── aa.json
+│   └── index.html
 ├── novaversaointernacional/
 │   └── nvi.json
+│   └── index.html
 └── index.html  ← página inicial com seleção das versões
 ```
 
