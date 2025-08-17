@@ -1,604 +1,512 @@
 <!doctype html>
 <html lang="pt-br">
+
 <head>
-  <meta charset="utf-8">
-  <title>Bíblia Online - Almeida Revista e Atualizada (RA)</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="../public/imagens/favicon.ico">
-  <style>
-    :root {
-      --bg: #f8f9fa;
-      --card: #ffffff;
-      --muted: #6c757d;
-      --text: #212529;
-      --accent: #0d6efd;
-      --accent2: #20c997;
+    <meta charset="utf-8">
+    <title>Bíblia Online - Almeida Revista e Atualizada (RA)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Leia e pesquise a Bíblia Sagrada na versão Almeida Revista e Atualizada (RA). Ferramenta online gratuita para o estudo do Velho e Novo Testamento.">
+    <meta name="keywords" content="Bíblia Online, Almeida Revista e Atualizada, RA, Bíblia Sagrada, Velho Testamento, Novo Testamento, Estudo Bíblico">
+    <meta name="author" content="Bíblia Sem Fronteiras">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.bibliasemfronteiras.com.br/">
+    <meta property="og:title" content="Bíblia Online - Almeida Revista e Atualizada (RA)">
+    <meta property="og:description" content="Leia e pesquise a Bíblia Sagrada na versão Almeida Revista e Atualizada (RA). Ferramenta online gratuita para o estudo do Velho e Novo Testamento.">
+    <meta property="og:image" content="https://www.bibliasemfronteiras.com.br/public/imagens/favicon.png">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.bibliasemfronteiras.com.br/">
+    <meta property="twitter:title" content="Bíblia Online - Almeida Revista e Atualizada (RA)">
+    <meta property="twitter:description" content="Leia e pesquise a Bíblia Sagrada na versão Almeida Revista e Atualizada (RA). Ferramenta online gratuita para o estudo do Velho e Novo Testamento.">
+    <meta property="twitter:image" content="https://www.bibliasemfronteiras.com.br/public/imagens/favicon.png">
+
+    <link rel="icon" type="image/x-icon" href="../public/imagens/favicon.ico">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Bíblia Online - Almeida Revista e Atualizada (RA)",
+      "url": "https://www.bibliasemfronteiras.com.br/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.bibliasemfronteiras.com.br/#q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
     }
+    </script>
 
-    * { box-sizing: border-box; }
+    <style>
+        :root {
+            --bg: #f8f9fa;
+            --card: #ffffff;
+            --muted: #6c757d;
+            --text: #212529;
+            --accent: #0d6efd;
+            --accent2: #20c997;
+        }
 
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial;
-      background: var(--bg);
-      color: var(--text);
-      font-size: 18px;
-    }
+        * { box-sizing: border-box; }
 
-    header {
-      padding: 20px;
-      border-bottom: 1px solid #dee2e6;
-      background: #fff;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-    }
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial;
+            background: var(--bg);
+            color: var(--text);
+            font-size: 18px;
+        }
 
-    h1 { font-size: 22px; margin: 0; font-weight: 700; }
+        header {
+            padding: 20px;
+            border-bottom: 1px solid #dee2e6;
+            background: #fff;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
 
-    .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        h1 { font-size: 22px; margin: 0; font-weight: 700; }
 
-    .btn {
-      padding: 10px 14px; font-size: 16px; border: 1px solid #ced4da; background: #fff;
-      cursor: pointer; border-radius: 8px; text-decoration: none; color: inherit;
-    }
-    .btn:hover { background: #e9ecef; }
-    .btn-accent2 { background: var(--accent2); color: #fff; border-color: var(--accent2); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
 
-    .tabs, .chips { display: flex; gap: 10px; flex-wrap: wrap; overflow-x: auto; padding-bottom: 4px; }
-    .tab, .chip {
-      padding: 12px 18px; font-size: 18px; border: 1px solid #ced4da; border-radius: 12px;
-      background: #fff; cursor: pointer; white-space: nowrap;
-    }
-    .tab.active, .chip.active { border-color: var(--accent); background: var(--accent); color: #fff; }
+        .btn {
+            padding: 10px 14px; font-size: 16px; border: 1px solid #ced4da; background: #fff;
+            cursor: pointer; border-radius: 8px; text-decoration: none; color: inherit;
+        }
+        .btn:hover { background: #e9ecef; }
+        .btn-accent2 { background: var(--accent2); color: #fff; border-color: var(--accent2); }
 
-    .grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
-    @media (min-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } }
+        .tabs, .chips { display: flex; gap: 10px; flex-wrap: wrap; overflow-x: auto; padding-bottom: 4px; }
+        .tab, .chip {
+            padding: 12px 18px; font-size: 18px; border: 1px solid #ced4da; border-radius: 12px;
+            background: #fff; cursor: pointer; white-space: nowrap;
+        }
+        .tab.active, .chip.active { border-color: var(--accent); background: var(--accent); color: #fff; }
 
-    .card { background: var(--card); border: 1px solid #dee2e6; border-radius: 14px; padding: 16px; }
+        .grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+        @media (min-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } }
 
-    .section-title { margin: 0 0 12px 0; font-size: 18px; color: var(--muted); font-weight: 600; }
+        .card { background: var(--card); border: 1px solid #dee2e6; border-radius: 14px; padding: 16px; }
 
-    .search {
-      width: 100%; padding: 14px 18px; font-size: 18px; border-radius: 12px; border: 1px solid #ced4da;
-      background: #fff; color: var(--text);
-    }
+        .section-title { margin: 0 0 12px 0; font-size: 18px; color: var(--muted); font-weight: 600; }
 
-    .versos { display: flex; flex-direction: column; gap: 12px; margin-top: 12px; }
+        .search {
+            width: 100%; padding: 14px 18px; font-size: 18px; border-radius: 12px; border: 1px solid #ced4da;
+            background: #fff; color: var(--text);
+        }
 
-    .verso {
-      padding: 14px; font-size: 18px; background: #fff; border: 1px solid #dee2e6; border-radius: 12px;
-      line-height: 1.5; display: flex; justify-content: space-between; align-items: flex-start;
-    }
-    .verso-texto { flex: 1; margin-right: 10px; }
+        .versos { display: flex; flex-direction: column; gap: 12px; margin-top: 12px; }
 
-    .muted { color: var(--muted); }
+        .verso {
+            padding: 14px; font-size: 18px; background: #fff; border: 1px solid #dee2e6; border-radius: 12px;
+            line-height: 1.5; display: flex; justify-content: space-between; align-items: flex-start;
+        }
+        .verso-texto { flex: 1; margin-right: 10px; }
 
-    .error {
-      color: #842029; background: #f8d7da; border: 1px solid #f5c2c7; padding: 14px; border-radius: 12px;
-      display: none;
-    }
+        .muted { color: var(--muted); }
 
-    .copy-btn {
-      padding: 10px 14px; font-size: 16px; background: var(--accent); color: #fff;
-      border: none; border-radius: 8px; cursor: pointer;
-    }
-    .copy-btn:hover { background: var(--accent2); }
+        .error {
+            color: #842029; background: #f8d7da; border: 1px solid #f5c2c7; padding: 14px; border-radius: 12px;
+            display: none;
+        }
 
-    .loading { text-align: center; padding: 20px; color: var(--muted); }
-  </style>
+        .copy-btn {
+            padding: 10px 14px; font-size: 16px; background: var(--accent); color: #fff;
+            border: none; border-radius: 8px; cursor: pointer;
+        }
+        .copy-btn:hover { background: var(--accent2); }
+
+        .loading { text-align: center; padding: 20px; color: var(--muted); }
+    </style>
 </head>
 
 <body>
-  <header>
-    <h1>Bíblia Online - Almeida Revista e Atualizada (Evangélica)</h1>
-  </header>
+    <header>
+        <h1>Bíblia Online - Almeida Revista e Atualizada (RA)</h1>
+    </header>
 
-  <div class="container">
-    <div id="loading" class="loading">Carregando Bíblia (RA)...</div>
+    <main class="container">
+        <div id="loading" class="loading">Carregando Bíblia...</div>
+        
+        <div id="content" style="display: none;">
+            <nav class="tabs" id="tabs"></nav>
 
-    <div id="content" style="display: none;">
-      <div class="tabs" id="tabs"></div>
+            <div class="grid">
+                <section class="card">
+                    <h2 class="section-title">Livros</h2>
+                    <input id="filtroLivros" class="search" placeholder="Filtrar livros..." />
+                    <div id="livros" class="chips" style="margin-top:12px;"></div>
+                    <div id="livrosEmpty" class="muted" style="margin-top:12px;display:none;">Nenhum livro encontrado.</div>
+                </section>
 
-      <div class="grid">
-        <div class="card">
-          <div class="section-title">Livros</div>
-          <input id="filtroLivros" class="search" placeholder="Filtrar livros..." />
-          <div id="livros" class="chips" style="margin-top:12px;"></div>
-          <div id="livrosEmpty" class="muted" style="margin-top:12px;display:none;">Nenhum livro encontrado.</div>
+                <section class="card">
+                    <h2 class="section-title">Capítulos</h2>
+                    <div id="capitulos" class="chips"></div>
+                    <div id="capitulosEmpty" class="muted" style="margin-top:12px;display:none;">Selecione um livro.</div>
+                </section>
+            </div>
+
+            <section class="card" style="margin-top:16px;">
+                <h2 class="section-title">Versículos</h2>
+                <input id="filtroVersiculos" class="search" placeholder="Pesquisar nos versículos..." style="margin-bottom:12px;">
+                <div style="margin-bottom:12px; display: flex; gap: 8px;">
+                    <button id="prevCap" class="btn btn-accent2">⟵ Anterior</button>
+                    <button id="nextCap" class="btn btn-accent2">Próximo ⟶</button>
+                </div>
+                <div id="versiculos" class="versos"></div>
+                <div id="versiculosEmpty" class="muted">Selecione um capítulo.</div>
+            </section>
+
+            <section class="card" style="margin-top:16px;">
+                <h2 class="section-title">Busca global</h2>
+                <input id="buscaGlobal" class="search" placeholder="Digite palavra ou frase..." />
+                <div id="resultadoGlobal" class="versos" style="margin-top:12px;"></div>
+            </section>
         </div>
 
-        <div class="card">
-          <div class="section-title">Capítulos</div>
-          <div id="capitulos" class="chips"></div>
-          <div id="capitulosEmpty" class="muted" style="margin-top:12px;display:none;">Selecione um livro.</div>
-        </div>
-      </div>
+        <div id="errorBox" class="error" style="display:none;margin-top:16px;"></div>
+        
+        <noscript>
+            <p>Para visualizar o conteúdo da Bíblia, por favor, ative o JavaScript no seu navegador.</p>
+        </noscript>
+    </main>
 
-      <div class="card" style="margin-top:16px;">
-        <div class="section-title">Versículos</div>
-        <input id="filtroVersiculos" class="search" placeholder="Pesquisar nos versículos..." style="margin-bottom:12px;">
-        <div style="margin-bottom:12px; display: flex; gap: 8px;">
-          <button id="prevCap" class="btn btn-accent2">⟵ Anterior</button>
-          <button id="nextCap" class="btn btn-accent2">Próximo ⟶</button>
-        </div>
-        <div id="versiculos" class="versos"></div>
-        <div id="versiculosEmpty" class="muted">Selecione um capítulo.</div>
-      </div>
+    <script>
+        // =========================
+        // Estado & Estruturas
+        // =========================
+        let bibliaIndex = {
+            antigoTestamento: [], // [{ name, chapters: [ [versos...], [versos...] ] }]
+            novoTestamento: []    // idem
+        };
+        let allVerses = []; // Flat array of all verses for global search
 
-      <div class="card" style="margin-top:16px;">
-        <div class="section-title">Busca global</div>
-        <input id="buscaGlobal" class="search" placeholder="Digite palavra ou frase..." />
-        <div id="resultadoGlobal" class="versos" style="margin-top:12px;"></div>
-      </div>
-    </div>
+        let state = {
+            testamentos: ['antigoTestamento', 'novoTestamento'],
+            testamento: null,
+            livros: [],
+            livro: null,
+            capitulos: [],
+            capitulo: null,
+            versiculos: [],
+            filtroVersos: ''
+        };
 
-    <div id="errorBox" class="error" style="display:none;margin-top:16px;"></div>
-  </div>
-
-  <script>
-    // =========================
-    // Estado & Estruturas
-    // =========================
-    let bibliaIndex = {
-      antigoTestamento: [], // [{name, chapters}]
-      novoTestamento: []    // idem
-    };
-
-    let state = {
-      testamentos: ['antigoTestamento', 'novoTestamento'], // chaves internas
-      testamento: null,  // 'antigoTestamento' | 'novoTestamento'
-      livros: [],        // nomes dos livros do testamento selecionado
-      livro: null,       // nome do livro selecionado
-      capitulos: [],     // [1..N] baseado no livro
-      capitulo: null,    // número do capítulo
-      versiculos: [],    // [{versiculo, texto}]
-      filtroVersos: ''
-    };
-
-    // =========================
-    // Helpers de UI
-    // =========================
-    function showError(msg) {
-      const box = document.getElementById('errorBox');
-      box.style.display = 'block';
-      box.textContent = msg;
-    }
-
-    function clearError() {
-      document.getElementById('errorBox').style.display = 'none';
-    }
-
-    function hideLoading() {
-      document.getElementById('loading').style.display = 'none';
-      document.getElementById('content').style.display = 'block';
-    }
-
-    // =========================
-    // Parser para o JSON RA (verses[])
-    // Converte para [{ name, chapters: string[][] }]
-    // =========================
-    function buildIndexFromRA(raJson) {
-      const verses = Array.isArray(raJson?.verses) ? raJson.verses : [];
-      const byBook = new Map(); // book_name -> { name, chapters: [], _order }
-
-      for (const v of verses) {
-        const name = (v.book_name || '').trim();
-        if (!name) continue;
-
-        if (!byBook.has(name)) {
-          byBook.set(name, { name, chapters: [], _order: Number.isFinite(v.book) ? v.book : 9999 });
+        // =========================
+        // Helpers de UI
+        // =========================
+        function showError(msg) {
+            const box = document.getElementById('errorBox');
+            box.style.display = 'block';
+            box.textContent = msg;
         }
-        const entry = byBook.get(name);
 
-        const chapIdx  = Math.max(0, (v.chapter || 1) - 1);
-        const verseIdx = Math.max(0, (v.verse   || 1) - 1);
+        function clearError() {
+            document.getElementById('errorBox').style.display = 'none';
+        }
 
-        if (!entry.chapters[chapIdx]) entry.chapters[chapIdx] = [];
-        entry.chapters[chapIdx][verseIdx] = v.text || '';
-      }
+        function hideLoading() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+        }
 
-      // Normaliza capítulos/versos (sem "buracos")
-      for (const entry of byBook.values()) {
-        entry.chapters = entry.chapters.map(cap => {
-          const max = cap ? cap.length : 0;
-          const out = new Array(max);
-          for (let i = 0; i < max; i++) out[i] = cap[i] ?? '';
-          return out;
-        });
-      }
+        // =========================
+        // Carregamento dos dados
+        // =========================
+        async function loadBibliaData() {
+            try {
+                // IMPORTANTE: Mantenha o arquivo "almeida_ra.json" na mesma pasta.
+                const response = await fetch('almeida_ra.json');
+                if (!response.ok) throw new Error('Erro ao carregar arquivo da Bíblia (almeida_ra.json)');
+                const data = await response.json();
+                
+                allVerses = data.verses; // Store for global search
 
-      // Ordena pela numeração do livro (1..66)
-      return Array.from(byBook.values())
-        .sort((a, b) => (a._order || 9999) - (b._order || 9999))
-        .map(({ _order, ...rest }) => rest);
-    }
-
-    // =========================
-    // Hidrata o estado a partir do RA parseado
-    // =========================
-    async function hydrateFromRA(raJson) {
-      const livrosFlat = buildIndexFromRA(raJson); // [{ name, chapters: string[][] }]
-
-      // Detecta início do NT: "Mateus" (fallback 39)
-      let ntStart = livrosFlat.findIndex(b => (b.name || '').toLowerCase() === 'mateus');
-      if (ntStart < 0) ntStart = 39;
-
-      bibliaIndex.antigoTestamento = livrosFlat.slice(0, ntStart);
-      bibliaIndex.novoTestamento   = livrosFlat.slice(ntStart);
-
-      // Testamento inicial
-      const tURL = state.testamento;
-      if (!tURL || !bibliaIndex[tURL] || bibliaIndex[tURL].length === 0) {
-        state.testamento = bibliaIndex.antigoTestamento.length ? 'antigoTestamento' : 'novoTestamento';
-      }
-
-      hideLoading();
-      await loadLivros();
-      renderAll();
-    }
-
-    // =========================
-    // Carregamento automático do RA
-    // =========================
-    async function loadBibliaData() {
-      try {
-        // IMPORTANTE: mantenha "almeida_ra.json" na mesma pasta deste HTML
-        const response = await fetch('almeida_ra.json', { cache: 'no-store' });
-        if (!response.ok) throw new Error('Erro ao carregar "almeida_ra.json" (HTTP ' + response.status + ').');
-        const ra = await response.json();
-
-        await hydrateFromRA(ra);
-
-        // Se URL já trouxe livro/capítulo, completa carregamentos:
-        if (state.livro) await loadCapitulos();
-        if (state.capitulo) await loadVersiculos();
-        renderAll();
-      } catch (error) {
-        showError(
-          'Erro ao carregar a Bíblia: ' + error.message +
-          '. Verifique se o arquivo "almeida_ra.json" está na mesma pasta do HTML ' +
-          'e se a página está sendo servida via HTTP'
-        );
-        hideLoading();
-      }
-    }
-
-    // =========================
-    // Renderização
-    // =========================
-    function renderTabs() {
-      const el = document.getElementById('tabs');
-      el.innerHTML = '';
-      state.testamentos.forEach(t => {
-        const b = document.createElement('button');
-        b.className = 'tab' + (state.testamento === t ? ' active' : '');
-        b.textContent = (t === 'antigoTestamento') ? 'Antigo Testamento' : 'Novo Testamento';
-        b.onclick = async () => {
-          state.testamento = t;
-          state.livro = null;
-          state.capitulo = null;
-          state.versiculos = [];
-          await loadLivros();
-          renderAll();
-          saveURLState();
-        };
-        el.appendChild(b);
-      });
-    }
-
-    function renderLivros() {
-      const el = document.getElementById('livros');
-      el.innerHTML = '';
-      const filtro = document.getElementById('filtroLivros').value.toLowerCase();
-      const lista = state.livros.filter(l => l.toLowerCase().includes(filtro));
-      document.getElementById('livrosEmpty').style.display = lista.length ? 'none' : 'block';
-      lista.forEach(livro => {
-        const c = document.createElement('button');
-        c.className = 'chip' + (state.livro === livro ? ' active' : '');
-        c.textContent = livro;
-        c.onclick = async () => {
-          state.livro = livro;
-          state.capitulo = null;
-          state.versiculos = [];
-          await loadCapitulos();
-          renderAll();
-          saveURLState();
-        };
-        el.appendChild(c);
-      });
-    }
-
-    function renderCapitulos() {
-      const el = document.getElementById('capitulos');
-      el.innerHTML = '';
-      document.getElementById('capitulosEmpty').style.display = state.capitulos.length ? 'none' : 'block';
-      state.capitulos.forEach(cap => {
-        const c = document.createElement('button');
-        c.className = 'chip' + (state.capitulo == cap ? ' active' : '');
-        c.textContent = cap;
-        c.onclick = async () => {
-          state.capitulo = cap;
-          await loadVersiculos();
-          renderAll();
-          saveURLState();
-          document.getElementById('versiculos').scrollIntoView({ behavior: 'smooth' });
-        };
-        el.appendChild(c);
-      });
-    }
-
-    function renderVersiculos() {
-      const el = document.getElementById('versiculos');
-      el.innerHTML = '';
-      const filtro = state.filtroVersos;
-      let lista = state.versiculos;
-      if (filtro) lista = lista.filter(v => v.texto.toLowerCase().includes(filtro));
-      document.getElementById('versiculosEmpty').style.display = lista.length ? 'none' : 'block';
-
-      lista.forEach(v => {
-        const versoEl = document.createElement('div');
-        versoEl.className = 'verso';
-
-        const textoEl = document.createElement('div');
-        textoEl.className = 'verso-texto';
-
-        const meta = document.createElement('div');
-        meta.className = 'muted';
-        const strong = document.createElement('strong');
-        strong.textContent = `${state.capitulo}:${v.versiculo}`;
-        meta.appendChild(strong);
-
-        const texto = document.createElement('div');
-        texto.textContent = v.texto;
-
-        textoEl.appendChild(meta);
-        textoEl.appendChild(texto);
-
-        const btn = document.createElement('button');
-        btn.className = 'copy-btn';
-        btn.textContent = 'Copiar';
-        btn.onclick = () => {
-          navigator.clipboard.writeText(`${state.livro} ${state.capitulo}:${v.versiculo} — ${v.texto}`);
-          btn.textContent = 'Copiado!';
-          setTimeout(() => btn.textContent = 'Copiar', 1500);
-        };
-
-        versoEl.appendChild(textoEl);
-        versoEl.appendChild(btn);
-        el.appendChild(versoEl);
-      });
-    }
-
-    function renderAll() {
-      clearError();
-      renderTabs();
-      renderLivros();
-      renderCapitulos();
-      renderVersiculos();
-    }
-
-    // =========================
-    // Navegação capítulo
-    // =========================
-    function getLivroAtualArr() {
-      return bibliaIndex[state.testamento] || [];
-    }
-
-    function findLivroByName(arr, nome) {
-      return arr.find(l => (l.name || '').toLowerCase() === (nome || '').toLowerCase());
-    }
-
-    async function prevCapitulo() {
-      if (!state.capitulo || !state.livro || !state.testamento) return;
-
-      const arr = getLivroAtualArr();
-      const livroIndex = arr.findIndex(l => (l.name || '').toLowerCase() === state.livro.toLowerCase());
-      if (livroIndex < 0) return;
-
-      const livroAtual = arr[livroIndex];
-      const capIndex = (state.capitulo - 1);
-
-      if (capIndex > 0) {
-        state.capitulo = capIndex; // capítulo anterior
-        await loadVersiculos();
-        renderAll();
-        saveURLState();
-      } else if (livroIndex > 0) {
-        const livroAnterior = arr[livroIndex - 1];
-        state.livro = livroAnterior.name;
-        state.capitulo = livroAnterior.chapters.length;
-        await loadCapitulos();
-        await loadVersiculos();
-        renderAll();
-        saveURLState();
-      }
-    }
-
-    async function nextCapitulo() {
-      if (!state.capitulo || !state.livro || !state.testamento) return;
-
-      const arr = getLivroAtualArr();
-      const livroIndex = arr.findIndex(l => (l.name || '').toLowerCase() === state.livro.toLowerCase());
-      if (livroIndex < 0) return;
-
-      const livroAtual = arr[livroIndex];
-      const capIndex = (state.capitulo - 1);
-
-      if (capIndex < livroAtual.chapters.length - 1) {
-        state.capitulo = capIndex + 2; // próximo capítulo
-        await loadVersiculos();
-        renderAll();
-        saveURLState();
-      } else if (livroIndex < arr.length - 1) {
-        const proximoLivro = arr[livroIndex + 1];
-        state.livro = proximoLivro.name;
-        state.capitulo = 1;
-        await loadCapitulos();
-        await loadVersiculos();
-        renderAll();
-        saveURLState();
-      }
-    }
-
-    // =========================
-    // Busca Global
-    // =========================
-    function buscaGlobal(q) {
-      const resultados = [];
-      const termoBusca = q.toLowerCase();
-
-      // percorre ambos testamentos
-      state.testamentos.forEach(testamentoKey => {
-        const arr = bibliaIndex[testamentoKey] || [];
-        arr.forEach(livro => {
-          (livro.chapters || []).forEach((cap, idxCap) => {
-            (cap || []).forEach((texto, idxVers) => {
-              if ((texto || '').toLowerCase().includes(termoBusca)) {
-                resultados.push({
-                  testamento: (testamentoKey === 'antigoTestamento') ? 'Antigo Testamento' : 'Novo Testamento',
-                  livro: livro.name,
-                  capitulo: idxCap + 1,
-                  versiculo: idxVers + 1,
-                  texto: texto
+                // Process flat data into a structured index
+                const tempIndex = {};
+                allVerses.forEach(v => {
+                    if (!tempIndex[v.book_name]) {
+                        tempIndex[v.book_name] = { name: v.book_name, chapters: [], book_number: v.book };
+                    }
+                    if (!tempIndex[v.book_name].chapters[v.chapter - 1]) {
+                        tempIndex[v.book_name].chapters[v.chapter - 1] = [];
+                    }
+                    tempIndex[v.book_name].chapters[v.chapter - 1][v.verse - 1] = v.text;
                 });
-              }
+                
+                const structuredBooks = Object.values(tempIndex).sort((a, b) => a.book_number - b.book_number);
+
+                // Dividir em Antigo e Novo Testamento (Mateus é o livro 40)
+                let ntStart = structuredBooks.findIndex(b => b.book_number === 40);
+                if (ntStart < 0) ntStart = 39; // Fallback
+
+                bibliaIndex.antigoTestamento = structuredBooks.slice(0, ntStart);
+                bibliaIndex.novoTestamento = structuredBooks.slice(ntStart);
+                
+                const tURL = state.testamento;
+                if (!tURL || !bibliaIndex[tURL] || bibliaIndex[tURL].length === 0) {
+                    state.testamento = bibliaIndex.antigoTestamento.length ? 'antigoTestamento' : 'novoTestamento';
+                }
+                
+                hideLoading();
+                await loadLivros();
+                renderAll();
+
+            } catch (error) {
+                showError('Erro ao processar a Bíblia: ' + error.message);
+                hideLoading();
+            }
+        }
+
+        // =========================
+        // Renderização
+        // =========================
+        function renderTabs() {
+            const el = document.getElementById('tabs');
+            el.innerHTML = '';
+            state.testamentos.forEach(t => {
+                const b = document.createElement('button');
+                b.className = 'tab' + (state.testamento === t ? ' active' : '');
+                b.textContent = (t === 'antigoTestamento') ? 'Antigo Testamento' : 'Novo Testamento';
+                b.onclick = () => selectTestamento(t);
+                el.appendChild(b);
             });
-          });
+        }
+
+        function renderLivros() {
+            const el = document.getElementById('livros');
+            const filtro = document.getElementById('filtroLivros').value.toLowerCase();
+            el.innerHTML = '';
+            
+            const livrosFiltrados = state.livros.filter(l => l.toLowerCase().includes(filtro));
+            
+            livrosFiltrados.forEach(l => {
+                const b = document.createElement('button');
+                b.className = 'chip' + (state.livro === l ? ' active' : '');
+                b.textContent = l;
+                b.onclick = () => selectLivro(l);
+                el.appendChild(b);
+            });
+            
+            document.getElementById('livrosEmpty').style.display = livrosFiltrados.length === 0 ? 'block' : 'none';
+        }
+
+        function renderCapitulos() {
+            const el = document.getElementById('capitulos');
+            el.innerHTML = '';
+            
+            if (!state.capitulos || state.capitulos.length === 0) {
+                document.getElementById('capitulosEmpty').style.display = 'block';
+                return;
+            }
+
+            document.getElementById('capitulosEmpty').style.display = 'none';
+            state.capitulos.forEach(c => {
+                const b = document.createElement('button');
+                b.className = 'chip' + (state.capitulo === c ? ' active' : '');
+                b.textContent = c;
+                b.onclick = () => selectCapitulo(c);
+                el.appendChild(b);
+            });
+        }
+
+        function renderVersiculos() {
+            const el = document.getElementById('versiculos');
+            el.innerHTML = '';
+            
+            if (!state.versiculos || state.versiculos.length === 0) {
+                 document.getElementById('versiculosEmpty').style.display = 'block';
+                return;
+            }
+            document.getElementById('versiculosEmpty').style.display = 'none';
+
+            const versosFiltrados = state.versiculos.filter(v => 
+                state.filtroVersos === '' || v.texto.toLowerCase().includes(state.filtroVersos)
+            );
+
+            versosFiltrados.forEach(v => {
+                const d = document.createElement('div');
+                d.className = 'verso';
+                
+                const span = document.createElement('span');
+                span.className = 'verso-texto';
+                span.innerHTML = `<b>${v.versiculo}.</b> ${v.texto}`;
+                
+                const copyBtn = document.createElement('button');
+                copyBtn.className = 'copy-btn';
+                copyBtn.textContent = 'Copiar';
+                copyBtn.onclick = () => navigator.clipboard.writeText(`${state.livro} ${state.capitulo}:${v.versiculo} - ${v.texto}`);
+                
+                d.appendChild(span);
+                d.appendChild(copyBtn);
+                el.appendChild(d);
+            });
+        }
+        
+        function renderAll() {
+            renderTabs();
+            renderLivros();
+            renderCapitulos();
+            renderVersiculos();
+        }
+
+        // =========================
+        // Lógica de Seleção
+        // =========================
+        async function selectTestamento(t) {
+            state.testamento = t;
+            state.livro = null;
+            state.capitulo = null;
+            state.versiculos = [];
+            await loadLivros();
+            renderAll();
+            updateURL();
+        }
+
+        async function selectLivro(l) {
+            state.livro = l;
+            state.capitulo = null;
+            state.versiculos = [];
+            await loadCapitulos();
+            renderAll();
+            updateURL();
+        }
+
+        async function selectCapitulo(c) {
+            state.capitulo = c;
+            await loadVersiculos();
+            renderAll();
+            updateURL();
+        }
+
+        function prevCapitulo() {
+            if (state.capitulo && state.capitulo > 1) {
+                selectCapitulo(state.capitulo - 1);
+            }
+        }
+        
+        function nextCapitulo() {
+            if (state.capitulo && state.capitulo < state.capitulos.length) {
+                selectCapitulo(state.capitulo + 1);
+            }
+        }
+
+        // =========================
+        // Lógica de Carregamento (do state)
+        // =========================
+        async function loadLivros() {
+            state.livros = bibliaIndex[state.testamento].map(l => l.name);
+        }
+
+        async function loadCapitulos() {
+            if (!state.livro) return;
+            const livroData = bibliaIndex[state.testamento].find(l => l.name === state.livro);
+            if (!livroData) return;
+            state.capitulos = Array.from({ length: livroData.chapters.length }, (_, i) => i + 1);
+        }
+
+        async function loadVersiculos() {
+            if (!state.livro || !state.capitulo) return;
+
+            const livroData = bibliaIndex[state.testamento].find(l => l.name === state.livro);
+            if (!livroData) return;
+            
+            const capituloData = livroData.chapters[state.capitulo - 1];
+            if (!capituloData) return;
+
+            state.versiculos = capituloData.map((texto, i) => ({
+                versiculo: i + 1,
+                texto: texto
+            }));
+        }
+
+        // =========================
+        // Busca Global
+        // =========================
+        function buscaGlobal(termo) {
+            const el = document.getElementById('resultadoGlobal');
+            el.innerHTML = '<div class="loading">Buscando...</div>';
+            
+            const termoLower = termo.toLowerCase();
+            const resultados = allVerses.filter(v => v.text.toLowerCase().includes(termoLower));
+            
+            el.innerHTML = '';
+            if (resultados.length === 0) {
+                el.innerHTML = '<div class="muted">Nenhum resultado encontrado.</div>';
+                return;
+            }
+
+            resultados.forEach(r => {
+                const d = document.createElement('div');
+                d.className = 'verso';
+                d.innerHTML = `<b>${r.book_name} ${r.chapter}:${r.verse}</b> - ${r.text}`;
+                el.appendChild(d);
+            });
+        }
+        
+        // =========================
+        // URL State Management
+        // =========================
+        function loadURLState() {
+            const params = new URLSearchParams(window.location.search);
+            if (params.has('t')) state.testamento = params.get('t');
+            if (params.has('l')) state.livro = params.get('l');
+            if (params.has('c')) state.capitulo = parseInt(params.get('c'), 10);
+        }
+        
+        function updateURL() {
+            const params = new URLSearchParams();
+            if (state.testamento) params.set('t', state.testamento);
+            if (state.livro) params.set('l', state.livro);
+            if (state.capitulo) params.set('c', state.capitulo);
+            
+            const newURL = `${window.location.pathname}?${params.toString()}`;
+            window.history.pushState({}, '', newURL);
+        }
+
+
+        // =========================
+        // Event Listeners
+        // =========================
+        document.getElementById('filtroLivros').addEventListener('input', renderLivros);
+        document.getElementById('filtroVersiculos').addEventListener('input', e => {
+            state.filtroVersos = e.target.value.toLowerCase();
+            renderVersiculos();
         });
-      });
+        document.getElementById('prevCap').addEventListener('click', prevCapitulo);
+        document.getElementById('nextCap').addEventListener('click', nextCapitulo);
 
-      const out = document.getElementById('resultadoGlobal');
-      out.innerHTML = '';
+        let buscaTimeout;
+        document.getElementById('buscaGlobal').addEventListener('input', e => {
+            clearTimeout(buscaTimeout);
+            const valor = e.target.value.trim();
+            if (valor.length > 2) {
+                buscaTimeout = setTimeout(() => buscaGlobal(valor), 300); // debounce
+            } else {
+                document.getElementById('resultadoGlobal').innerHTML = '';
+            }
+        });
 
-      if (resultados.length === 0) {
-        const div = document.createElement('div');
-        div.className = 'muted';
-        div.textContent = 'Nenhum resultado encontrado.';
-        out.appendChild(div);
-        return;
-      }
+        // =========================
+        // Init
+        // =========================
+        (async function init() {
+            try {
+                loadURLState();
+                await loadBibliaData();
 
-      resultados.slice(0, 50).forEach(r => {
-        const div = document.createElement('div');
-        div.className = 'verso';
-
-        const textoWrap = document.createElement('div');
-        textoWrap.className = 'verso-texto';
-
-        const meta = document.createElement('div');
-        meta.className = 'muted';
-        const strong = document.createElement('strong');
-        strong.textContent = `${r.livro} ${r.capitulo}:${r.versiculo}`;
-        meta.appendChild(strong);
-        meta.appendChild(document.createTextNode(` (${r.testamento})`));
-
-        const texto = document.createElement('div');
-        texto.textContent = r.texto;
-
-        textoWrap.appendChild(meta);
-        textoWrap.appendChild(texto);
-
-        div.appendChild(textoWrap);
-        out.appendChild(div);
-      });
-
-      if (resultados.length > 50) {
-        const div = document.createElement('div');
-        div.className = 'muted';
-        div.style.textAlign = 'center';
-        div.textContent = `... e mais ${resultados.length - 50} resultados. Refine sua busca.`;
-        out.appendChild(div);
-      }
-    }
-
-    // =========================
-    // Carregadores
-    // =========================
-    async function loadLivros() {
-      const arr = bibliaIndex[state.testamento] || [];
-      state.livros = arr.map(l => l.name);
-    }
-
-    async function loadCapitulos() {
-      if (!state.livro) { state.capitulos = []; return; }
-      const arr = bibliaIndex[state.testamento] || [];
-      const livro = findLivroByName(arr, state.livro);
-      state.capitulos = livro ? Array.from({ length: (livro.chapters || []).length }, (_, i) => i + 1) : [];
-    }
-
-    async function loadVersiculos() {
-      if (!state.livro || !state.capitulo) { state.versiculos = []; return; }
-      const arr = bibliaIndex[state.testamento] || [];
-      const livro = findLivroByName(arr, state.livro);
-      if (!livro) { state.versiculos = []; return; }
-      const cap = (livro.chapters || [])[state.capitulo - 1] || [];
-      state.versiculos = cap.map((texto, idx) => ({ versiculo: idx + 1, texto: texto || '' }));
-    }
-
-    // =========================
-    // Estado na URL
-    // =========================
-    function saveURLState() {
-      const params = new URLSearchParams();
-      if (state.testamento) params.set('t', state.testamento);
-      if (state.livro) params.set('l', state.livro);
-      if (state.capitulo) params.set('c', state.capitulo);
-      history.replaceState({}, '', '?' + params.toString());
-    }
-
-    function loadURLState() {
-      const p = new URLSearchParams(window.location.search);
-      const t = p.get('t'); // 'antigoTestamento' | 'novoTestamento'
-      const l = p.get('l');
-      const c = p.get('c');
-
-      state.testamento = (t === 'novoTestamento' || t === 'antigoTestamento') ? t : null;
-      state.livro = l || null;
-      state.capitulo = c ? parseInt(c, 10) : null;
-    }
-
-    // =========================
-    // Eventos
-    // =========================
-    document.getElementById('filtroLivros').addEventListener('input', renderLivros);
-    document.getElementById('filtroVersiculos').addEventListener('input', e => {
-      state.filtroVersos = e.target.value.toLowerCase();
-      renderVersiculos();
-    });
-    document.getElementById('prevCap').addEventListener('click', prevCapitulo);
-    document.getElementById('nextCap').addEventListener('click', nextCapitulo);
-
-    let buscaTimeout;
-    document.getElementById('buscaGlobal').addEventListener('input', e => {
-      clearTimeout(buscaTimeout);
-      const valor = e.target.value.trim();
-      if (valor.length > 2) {
-        buscaTimeout = setTimeout(() => buscaGlobal(valor), 300); // debounce
-      } else {
-        document.getElementById('resultadoGlobal').innerHTML = '';
-      }
-    });
-
-    // =========================
-    // Init
-    // =========================
-    (async function init() {
-      try {
-        loadURLState();
-        await loadBibliaData();
-
-        // Se URL já trouxe livro/capítulo, completa carregamentos:
-        if (state.livro) await loadCapitulos();
-        if (state.capitulo) await loadVersiculos();
-        renderAll();
-      } catch (e) {
-        showError(e.message);
-        hideLoading();
-      }
-    })();
-  </script>
+                if (state.livro) await loadCapitulos();
+                if (state.capitulo) await loadVersiculos();
+                renderAll();
+            } catch (e) {
+                showError(e.message);
+                hideLoading();
+            }
+        })();
+    </script>
 </body>
+
 </html>
