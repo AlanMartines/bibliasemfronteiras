@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Bíblia Online - Nova Versão Transformadora (NVT)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description"
+    content="Leia a Bíblia Sagrada na Nova Versão Transformadora (NVT), uma tradução contemporânea que busca clareza e impacto. Ferramenta de estudo online gratuita." />
+  <meta name="keywords" content="Bíblia Online, Nova Versão Transformadora, NVT, Bíblia Sagrada, Estudo Bíblico" />
+  <meta name="author" content="Bíblia Sem Fronteiras" />
+  <style>
+    :root {
+      --bg: #f8f9fa;
+      --card: #fff;
+      --muted: #6c757d;
+      --text: #212529;
+      --accent: #0d6efd;
+      --accent2: #20c997;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
+        Cantarell, "Helvetica Neue", Arial;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 18px;
+    }
+
+    header {
+      padding: 20px;
+      border-bottom: 1px solid #dee2e6;
+      background: #fff;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin: 0;
+      font-weight: 700;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .btn {
+      padding: 10px 14px;
+      font-size: 16px;
+      border: 1px solid #ced4da;
+      background: #fff;
+      cursor: pointer;
+      border-radius: 8px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .btn:hover {
+      background: #e9ecef;
+    }
+
+    .btn-accent2 {
+      background: var(--accent2);
+      color: #fff;
+      border-color: var(--accent2);
+    }
+
+    .tabs,
+    .chips {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .tab,
+    .chip {
+      padding: 12px 18px;
+      font-size: 18px;
+      border: 1px solid #ced4da;
+      border-radius: 12px;
+      background: #fff;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .tab.active,
+    .chip.active {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    @media (min-width: 900px) {
+      .grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid #dee2e6;
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .section-title {
+      margin: 0 0 12px 0;
+      font-size: 18px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .search {
+      width: 100%;
+      padding: 14px 18px;
+      font-size: 18px;
+      border-radius: 12px;
+      border: 1px solid #ced4da;
+      background: #fff;
+      color: var(--text);
+    }
+
+    .versos {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .verso {
+      padding: 14px;
+      font-size: 18px;
+      background: #fff;
+      border: 1px solid #dee2e6;
+      border-radius: 12px;
+      line-height: 1.5;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .verso-texto {
+      flex: 1;
+      margin-right: 10px;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .error {
+      color: #842029;
+      background: #f8d7da;
+      border: 1px solid #f5c2c7;
+      padding: 14px;
+      border-radius: 12px;
+      display: none;
+    }
+
+    .copy-btn {
+      padding: 10px 14px;
+      font-size: 16px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .copy-btn:hover {
+      background: var(--accent2);
+    }
+
+    .loading {
+      text-align: center;
+      padding: 20px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <a href="../index.html" target="_blank">🏡</a> <h1>Bíblia Online - Nova Versão Transformadora (NVT)</h1>
+  </header>
+  <main class="container">
+    <div id="loading" class="loading">Carregando Bíblia...</div>
+    <div id="content" style="display: none">
+      <nav class="tabs" id="tabs"></nav>
+      <div class="grid">
+        <section class="card">
+          <h2 class="section-title">Livros</h2>
+          <input id="filtroLivros" class="search" placeholder="Filtrar livros..." />
+          <div id="livros" class="chips" style="margin-top: 12px"></div>
+          <div id="livrosEmpty" class="muted" style="margin-top: 12px; display: none">
+            Nenhum livro encontrado.
+          </div>
+        </section>
+        <section class="card">
+          <h2 class="section-title">Capítulos</h2>
+          <div id="capitulos" class="chips"></div>
+          <div id="capitulosEmpty" class="muted" style="margin-top: 12px; display: none">
+            Selecione um livro.
+          </div>
+        </section>
+      </div>
+      <section class="card" style="margin-top: 16px">
+        <h2 class="section-title">Versículos</h2>
+        <input id="filtroVersiculos" class="search" placeholder="Pesquisar nos versículos..."
+          style="margin-bottom: 12px" />
+        <div style="margin-bottom: 12px; display: flex; gap: 8px">
+          <button id="prevCap" class="btn btn-accent2">⟵ Anterior</button><button id="nextCap"
+            class="btn btn-accent2">Próximo ⟶</button>
+        </div>
+        <div id="versiculos" class="versos"></div>
+        <div id="versiculosEmpty" class="muted">Selecione um capítulo.</div>
+      </section>
+      <section class="card" style="margin-top: 16px">
+        <h2 class="section-title">Busca global</h2>
+        <input id="buscaGlobal" class="search" placeholder="Digite palavra ou frase..." />
+        <div id="resultadoGlobal" class="versos" style="margin-top: 12px"></div>
+      </section>
+    </div>
+    <div id="errorBox" class="error" style="display: none; margin-top: 16px"></div>
+    <noscript>
+      <p>
+        Para visualizar o conteúdo da Bíblia, por favor, ative o JavaScript no
+        seu navegador.
+      </p>
+    </noscript>
+  </main>
+  <script>
+    let bibliaIndex = {
+      antigoTestamento: [],
+      novoTestamento: []
+    };
+    let state = {
+      testamentos: ["antigoTestamento", "novoTestamento"],
+      testamento: null,
+      livros: [],
+      livro: null,
+      capitulos: [],
+      capitulo: null,
+      versiculos: [],
+      filtroVersos: "",
+    };
+
+    function showError(msg) {
+      const box = document.getElementById("errorBox");
+      box.style.display = "block";
+      box.textContent = msg;
+    }
+
+    function hideLoading() {
+      document.getElementById("loading").style.display = "none";
+      document.getElementById("content").style.display = "block";
+    }
+    async function loadBibliaData() {
+      try {
+        const response = await fetch("nvt.json"); // <-- MUDANÇA AQUI
+        if (!response.ok)
+          throw new Error("Erro ao carregar arquivo nvt.json");
+        const livrosFlat = await response.json();
+        let ntStart = livrosFlat.findIndex(
+          (b) =>
+          (b.abbrev && b.abbrev.toLowerCase() === "mt") ||
+          (b.name && b.name.toLowerCase() === "mateus")
+        );
+        if (ntStart < 0) ntStart = 39;
+        bibliaIndex.antigoTestamento = livrosFlat.slice(0, ntStart);
+        bibliaIndex.novoTestamento = livrosFlat.slice(ntStart);
+        const tURL = state.testamento;
+        if (!tURL || !bibliaIndex[tURL] || bibliaIndex[tURL].length === 0) {
+          state.testamento = bibliaIndex.antigoTestamento.length ?
+            "antigoTestamento" :
+            "novoTestamento";
+        }
+        hideLoading();
+        await loadLivros();
+        renderAll();
+      } catch (error) {
+        showError("Erro ao carregar a Bíblia: " + error.message);
+        hideLoading();
+      }
+    }
+    // Resto do JavaScript é idêntico
+    function renderTabs() {
+      const el = document.getElementById("tabs");
+      el.innerHTML = "";
+      state.testamentos.forEach((t) => {
+        const b = document.createElement("button");
+        b.className = "tab" + (state.testamento === t ? " active" : "");
+        b.textContent =
+          t === "antigoTestamento" ? "Antigo Testamento" : "Novo Testamento";
+        b.onclick = () => selectTestamento(t);
+        el.appendChild(b);
+      });
+    }
+
+    function renderLivros() {
+      const el = document.getElementById("livros");
+      const filtro = document
+        .getElementById("filtroLivros")
+        .value.toLowerCase();
+      el.innerHTML = "";
+      const livrosFiltrados = state.livros.filter((l) =>
+        l.toLowerCase().includes(filtro)
+      );
+      livrosFiltrados.forEach((l) => {
+        const b = document.createElement("button");
+        b.className = "chip" + (state.livro === l ? " active" : "");
+        b.textContent = l;
+        b.onclick = () => selectLivro(l);
+        el.appendChild(b);
+      });
+      document.getElementById("livrosEmpty").style.display =
+        livrosFiltrados.length === 0 ? "block" : "none";
+    }
+
+    function renderCapitulos() {
+      const el = document.getElementById("capitulos");
+      el.innerHTML = "";
+      if (!state.capitulos || state.capitulos.length === 0) {
+        document.getElementById("capitulosEmpty").style.display = "block";
+        return;
+      }
+      document.getElementById("capitulosEmpty").style.display = "none";
+      state.capitulos.forEach((c) => {
+        const b = document.createElement("button");
+        b.className = "chip" + (state.capitulo === c ? " active" : "");
+        b.textContent = c;
+        b.onclick = () => selectCapitulo(c);
+        el.appendChild(b);
+      });
+    }
+
+    function renderVersiculos() {
+      const el = document.getElementById("versiculos");
+      el.innerHTML = "";
+      if (!state.versiculos || state.versiculos.length === 0) {
+        document.getElementById("versiculosEmpty").style.display = "block";
+        return;
+      }
+      document.getElementById("versiculosEmpty").style.display = "none";
+      const versosFiltrados = state.versiculos.filter(
+        (v) =>
+        state.filtroVersos === "" ||
+        v.texto.toLowerCase().includes(state.filtroVersos)
+      );
+      versosFiltrados.forEach((v) => {
+        const d = document.createElement("div");
+        d.className = "verso";
+        const span = document.createElement("span");
+        span.className = "verso-texto";
+        span.innerHTML = `<b>${v.versiculo}.</b> ${v.texto}`;
+        const copyBtn = document.createElement("button");
+        copyBtn.className = "copy-btn";
+        copyBtn.textContent = "Copiar";
+        copyBtn.onclick = () =>
+          navigator.clipboard.writeText(
+            `${state.livro} ${state.capitulo}:${v.versiculo} - ${v.texto}`
+          );
+        d.appendChild(span);
+        d.appendChild(copyBtn);
+        el.appendChild(d);
+      });
+    }
+
+    function renderAll() {
+      renderTabs();
+      renderLivros();
+      renderCapitulos();
+      renderVersiculos();
+    }
+    async function selectTestamento(t) {
+      state.testamento = t;
+      state.livro = null;
+      state.capitulo = null;
+      state.versiculos = [];
+      await loadLivros();
+      renderAll();
+      updateURL();
+    }
+    async function selectLivro(l) {
+      state.livro = l;
+      state.capitulo = null;
+      state.versiculos = [];
+      await loadCapitulos();
+      renderAll();
+      updateURL();
+    }
+    async function selectCapitulo(c) {
+      state.capitulo = c;
+      await loadVersiculos();
+      renderAll();
+      updateURL();
+    }
+
+    function prevCapitulo() {
+      if (state.capitulo && state.capitulo > 1) {
+        selectCapitulo(state.capitulo - 1);
+      }
+    }
+
+    function nextCapitulo() {
+      if (
+        state.capitulo &&
+        state.capitulos.length > 0 &&
+        state.capitulo < state.capitulos.length
+      ) {
+        selectCapitulo(state.capitulo + 1);
+      }
+    }
+    async function loadLivros() {
+      state.livros = bibliaIndex[state.testamento].map((l) => l.name);
+    }
+    async function loadCapitulos() {
+      if (!state.livro) return;
+      const livroData = bibliaIndex[state.testamento].find(
+        (l) => l.name === state.livro
+      );
+      if (livroData) {
+        state.capitulos = Array.from({
+            length: livroData.chapters.length
+          },
+          (_, i) => i + 1
+        );
+      }
+    }
+    async function loadVersiculos() {
+      if (!state.livro || !state.capitulo) return;
+      const livroData = bibliaIndex[state.testamento].find(
+        (l) => l.name === state.livro
+      );
+      if (livroData) {
+        const capituloData = livroData.chapters[state.capitulo - 1];
+        if (capituloData) {
+          state.versiculos = capituloData.map((texto, i) => ({
+            versiculo: i + 1,
+            texto: texto,
+          }));
+        }
+      }
+    }
+
+    function buscaGlobal(termo) {
+      const el = document.getElementById("resultadoGlobal");
+      el.innerHTML = '<div class="loading">Buscando...</div>';
+      const resultados = [];
+      const termoLower = termo.toLowerCase();
+      ["antigoTestamento", "novoTestamento"].forEach((t) => {
+        bibliaIndex[t].forEach((livro) => {
+          livro.chapters.forEach((cap, iCap) => {
+            cap.forEach((ver, iVer) => {
+              if (ver.toLowerCase().includes(termoLower)) {
+                resultados.push({
+                  livro: livro.name,
+                  capitulo: iCap + 1,
+                  versiculo: iVer + 1,
+                  texto: ver,
+                });
+              }
+            });
+          });
+        });
+      });
+      el.innerHTML = "";
+      if (resultados.length === 0) {
+        el.innerHTML =
+          '<div class="muted">Nenhum resultado encontrado.</div>';
+        return;
+      }
+      resultados.forEach((r) => {
+        const d = document.createElement("div");
+        d.className = "verso";
+        d.innerHTML = `<b>${r.livro} ${r.capitulo}:${r.versiculo}</b> - ${r.texto}`;
+        el.appendChild(d);
+      });
+    }
+
+    function loadURLState() {
+      const p = new URLSearchParams(window.location.search);
+      if (p.has("t")) state.testamento = p.get("t");
+      if (p.has("l")) state.livro = p.get("l");
+      if (p.has("c")) state.capitulo = parseInt(p.get("c"), 10);
+    }
+
+    function updateURL() {
+      const p = new URLSearchParams();
+      if (state.testamento) p.set("t", state.testamento);
+      if (state.livro) p.set("l", state.livro);
+      if (state.capitulo) p.set("c", state.capitulo);
+      const newURL = `${window.location.pathname}?${p.toString()}`;
+      window.history.pushState({}, "", newURL);
+    }
+    document
+      .getElementById("filtroLivros")
+      .addEventListener("input", renderLivros);
+    document
+      .getElementById("filtroVersiculos")
+      .addEventListener("input", (e) => {
+        state.filtroVersos = e.target.value.toLowerCase();
+        renderVersiculos();
+      });
+    document
+      .getElementById("prevCap")
+      .addEventListener("click", prevCapitulo);
+    document
+      .getElementById("nextCap")
+      .addEventListener("click", nextCapitulo);
+    let buscaTimeout;
+    document.getElementById("buscaGlobal").addEventListener("input", (e) => {
+      clearTimeout(buscaTimeout);
+      const valor = e.target.value.trim();
+      if (valor.length > 2) {
+        buscaTimeout = setTimeout(() => buscaGlobal(valor), 300);
+      } else {
+        document.getElementById("resultadoGlobal").innerHTML = "";
+      }
+    });
+    (async function init() {
+      try {
+        loadURLState();
+        await loadBibliaData();
+        if (state.livro) await loadCapitulos();
+        if (state.capitulo) await loadVersiculos();
+        renderAll();
+      } catch (e) {
+        showError(e.message);
+        hideLoading();
+      }
+    })();
+  </script>
+</body>
+
+</html>
