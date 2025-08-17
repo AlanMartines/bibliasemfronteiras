@@ -61,7 +61,8 @@ Um agradecimento especial aos criadores e mantenedores dos repositórios que dis
 * [fidalgobr/bibliaAveMariaJSON](https://github.com/fidalgobr/bibliaAveMariaJSON)
   Contém a versão **Ave Maria** em JSON, contribuindo com a tradição católica.
 
-* Versões **RA** e **ARC** foram adaptadas a partir de fontes de domínio público e revisadas para melhor consistência.
+* [DanielLiberato/Biblia-Sagrada-Json-JFA](https://github.com/DanielLiberato/Biblia-Sagrada-Json-JFA)
+  Contém a versão **RC** e **RA**.
 
 ## 🛠️ Tecnologias usadas
 
