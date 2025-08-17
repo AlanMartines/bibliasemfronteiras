@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>Bíblia Online - Índice</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link rel="icon" type="image/x-icon" href="../public/imagens/favicon.ico">
     <style>
         :root {
             --bg: #f8f9fa;
@@ -201,7 +201,7 @@
 
     <div class="container">
         <div id="loading" class="loading">Carregando Bíblia...</div>
-        
+
         <div id="content" style="display: none;">
             <div class="tabs" id="tabs"></div>
 
@@ -210,19 +210,22 @@
                     <div class="section-title">Livros</div>
                     <input id="filtroLivros" class="search" placeholder="Filtrar livros..." />
                     <div id="livros" class="chips" style="margin-top:12px;"></div>
-                    <div id="livrosEmpty" class="muted" style="margin-top:12px;display:none;">Nenhum livro encontrado.</div>
+                    <div id="livrosEmpty" class="muted" style="margin-top:12px;display:none;">Nenhum livro encontrado.
+                    </div>
                 </div>
 
                 <div class="card">
                     <div class="section-title">Capítulos</div>
                     <div id="capitulos" class="chips"></div>
-                    <div id="capitulosEmpty" class="muted" style="margin-top:12px;display:none;">Selecione um livro.</div>
+                    <div id="capitulosEmpty" class="muted" style="margin-top:12px;display:none;">Selecione um livro.
+                    </div>
                 </div>
             </div>
 
             <div class="card" style="margin-top:16px;">
                 <div class="section-title">Versículos</div>
-                <input id="filtroVersiculos" class="search" placeholder="Pesquisar nos versículos..." style="margin-bottom:12px;">
+                <input id="filtroVersiculos" class="search" placeholder="Pesquisar nos versículos..."
+                    style="margin-bottom:12px;">
                 <div style="margin-bottom:12px; display: flex; gap: 8px;">
                     <button id="prevCap" class="btn btn-accent2">⟵ Anterior</button>
                     <button id="nextCap" class="btn btn-accent2">Próximo ⟶</button>
@@ -276,14 +279,14 @@
                     throw new Error('Erro ao carregar arquivo da Bíblia');
                 }
                 bibliaData = await response.json();
-                
+
                 // Ordem fixa: Antigo -> Novo (somente chaves existentes)
-                state.testamentos = ['antigoTestamento','novoTestamento'].filter(k => bibliaData[k]);
+                state.testamentos = ['antigoTestamento', 'novoTestamento'].filter(k => bibliaData[k]);
 
                 if (!state.testamento) {
                     state.testamento = state.testamentos[0] || null;
                 }
-                
+
                 hideLoading();
                 await loadLivros();
                 renderAll();
@@ -409,12 +412,12 @@
 
         async function prevCapitulo() {
             if (!state.capitulo || !state.livro || !state.testamento) return;
-            
+
             const livroAtual = bibliaData[state.testamento].find(l => l.nome === state.livro);
             if (!livroAtual) return;
-            
+
             const capituloIndex = livroAtual.capitulos.findIndex(c => c.capitulo == state.capitulo);
-            
+
             if (capituloIndex > 0) {
                 // Capítulo anterior no mesmo livro
                 state.capitulo = livroAtual.capitulos[capituloIndex - 1].capitulo;
@@ -438,12 +441,12 @@
 
         async function nextCapitulo() {
             if (!state.capitulo || !state.livro || !state.testamento) return;
-            
+
             const livroAtual = bibliaData[state.testamento].find(l => l.nome === state.livro);
             if (!livroAtual) return;
-            
+
             const capituloIndex = livroAtual.capitulos.findIndex(c => c.capitulo == state.capitulo);
-            
+
             if (capituloIndex < livroAtual.capitulos.length - 1) {
                 // Próximo capítulo no mesmo livro
                 state.capitulo = livroAtual.capitulos[capituloIndex + 1].capitulo;
@@ -468,7 +471,7 @@
         function buscaGlobal(q) {
             const resultados = [];
             const termoBusca = q.toLowerCase();
-            
+
             state.testamentos.forEach(testamento => {
                 bibliaData[testamento].forEach(livro => {
                     livro.capitulos.forEach(capitulo => {
@@ -486,10 +489,10 @@
                     });
                 });
             });
-            
+
             const out = document.getElementById('resultadoGlobal');
             out.innerHTML = '';
-            
+
             if (resultados.length === 0) {
                 const div = document.createElement('div');
                 div.className = 'muted';
@@ -497,7 +500,7 @@
                 out.appendChild(div);
                 return;
             }
-            
+
             resultados.slice(0, 50).forEach(r => { // Limitar a 50 resultados
                 const div = document.createElement('div');
                 div.className = 'verso';
@@ -522,7 +525,7 @@
                 div.appendChild(textoWrap);
                 out.appendChild(div);
             });
-            
+
             if (resultados.length > 50) {
                 const div = document.createElement('div');
                 div.className = 'muted';
@@ -545,7 +548,7 @@
                 state.capitulos = [];
                 return;
             }
-            
+
             const livro = bibliaData[state.testamento].find(l => l.nome === state.livro);
             if (livro) {
                 state.capitulos = livro.capitulos.map(cap => cap.capitulo);
@@ -559,7 +562,7 @@
                 state.versiculos = [];
                 return;
             }
-            
+
             const livro = bibliaData[state.testamento].find(l => l.nome === state.livro);
             if (livro) {
                 const capitulo = livro.capitulos.find(c => c.capitulo == state.capitulo);
@@ -595,7 +598,7 @@
         });
         document.getElementById('prevCap').addEventListener('click', prevCapitulo);
         document.getElementById('nextCap').addEventListener('click', nextCapitulo);
-        
+
         let buscaTimeout;
         document.getElementById('buscaGlobal').addEventListener('input', e => {
             clearTimeout(buscaTimeout);
@@ -613,7 +616,7 @@
             try {
                 loadURLState();
                 await loadBibliaData();
-                
+
                 if (state.livro) await loadCapitulos();
                 if (state.capitulo) await loadVersiculos();
                 renderAll();
