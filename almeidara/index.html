@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <title>Bíblia Online - Índice</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        :root {
+            --bg: #f8f9fa;
+            --card: #ffffff;
+            --muted: #6c757d;
+            --text: #212529;
+            --accent: #0d6efd;
+            --accent2: #20c997;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial;
+            background: var(--bg);
+            color: var(--text);
+            font-size: 18px;
+        }
+
+        header {
+            padding: 20px;
+            border-bottom: 1px solid #dee2e6;
+            background: #fff;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h1 { font-size: 22px; margin: 0; font-weight: 700; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+
+        .btn {
+            padding: 10px 14px; font-size: 16px; border: 1px solid #ced4da; background: #fff;
+            cursor: pointer; border-radius: 8px; text-decoration: none; color: inherit;
+        }
+        .btn:hover { background: #e9ecef; }
+        .btn-accent2 { background: var(--accent2); color: #fff; border-color: var(--accent2); }
+
+        .tabs, .chips { display: flex; gap: 10px; flex-wrap: wrap; overflow-x: auto; padding-bottom: 4px; }
+        .tab, .chip {
+            padding: 12px 18px; font-size: 18px; border: 1px solid #ced4da; border-radius: 12px;
+            background: #fff; cursor: pointer; white-space: nowrap;
+        }
+        .tab.active, .chip.active { border-color: var(--accent); background: var(--accent); color: #fff; }
+
+        .grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+        @media (min-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } }
+
+        .card { background: var(--card); border: 1px solid #dee2e6; border-radius: 14px; padding: 16px; }
+
+        .section-title { margin: 0 0 12px 0; font-size: 18px; color: var(--muted); font-weight: 600; }
+
+        .search {
+            width: 100%; padding: 14px 18px; font-size: 18px; border-radius: 12px; border: 1px solid #ced4da;
+            background: #fff; color: var(--text);
+        }
+
+        .versos { display: flex; flex-direction: column; gap: 12px; margin-top: 12px; }
+
+        .verso {
+            padding: 14px; font-size: 18px; background: #fff; border: 1px solid #dee2e6; border-radius: 12px;
+            line-height: 1.5; display: flex; justify-content: space-between; align-items: flex-start;
+        }
+        .verso-texto { flex: 1; margin-right: 10px; }
+
+        .muted { color: var(--muted); }
+
+        .error {
+            color: #842029; background: #f8d7da; border: 1px solid #f5c2c7; padding: 14px; border-radius: 12px;
+            display: none;
+        }
+
+        .copy-btn {
+            padding: 10px 14px; font-size: 16px; background: var(--accent); color: #fff;
+            border: none; border-radius: 8px; cursor: pointer;
+        }
+        .copy-btn:hover { background: var(--accent2); }
+
+        .loading { text-align: center; padding: 20px; color: var(--muted); }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Bíblia Online - Nova Versão Internacional (Evangélica)</h1>
+    </header>
+
+    <div class="container">
+        <div id="loading" class="loading">Carregando Bíblia...</div>
+        
+        <div id="content" style="display: none;">
+            <div class="tabs" id="tabs"></div>
+
+            <div class="grid">
+                <div class="card">
+                    <div class="section-title">Livros</div>
+                    <input id="filtroLivros" class="search" placeholder="Filtrar livros..." />
+                    <div id="livros" class="chips" style="margin-top:12px;"></div>
+                    <div id="livrosEmpty" class="muted" style="margin-top:12px;display:none;">Nenhum livro encontrado.</div>
+                </div>
+
+                <div class="card">
+                    <div class="section-title">Capítulos</div>
+                    <div id="capitulos" class="chips"></div>
+                    <div id="capitulosEmpty" class="muted" style="margin-top:12px;display:none;">Selecione um livro.</div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top:16px;">
+                <div class="section-title">Versículos</div>
+                <input id="filtroVersiculos" class="search" placeholder="Pesquisar nos versículos..." style="margin-bottom:12px;">
+                <div style="margin-bottom:12px; display: flex; gap: 8px;">
+                    <button id="prevCap" class="btn btn-accent2">⟵ Anterior</button>
+                    <button id="nextCap" class="btn btn-accent2">Próximo ⟶</button>
+                </div>
+                <div id="versiculos" class="versos"></div>
+                <div id="versiculosEmpty" class="muted">Selecione um capítulo.</div>
+            </div>
+
+            <div class="card" style="margin-top:16px;">
+                <div class="section-title">Busca global</div>
+                <input id="buscaGlobal" class="search" placeholder="Digite palavra ou frase..." />
+                <div id="resultadoGlobal" class="versos" style="margin-top:12px;"></div>
+            </div>
+        </div>
+
+        <div id="errorBox" class="error" style="display:none;margin-top:16px;"></div>
+    </div>
+
+<script>
+    // === NOVO: converte o JSON RA (verses[]) para [{name, chapters: string[][]}] ===
+    function buildIndexFromRA(raJson) {
+        const byBook = new Map(); // book_name -> { name, chapters: [], _order }
+        // Para ordenar corretamente, usamos o campo numérico "book" do arquivo
+        const orderByName = new Map(); // book_name -> book (número canônico)
+
+        (raJson.verses || []).forEach(v => {
+            const name = (v.book_name || '').trim();
+            if (!name) return;
+
+            if (!byBook.has(name)) {
+                byBook.set(name, { name, chapters: [], _order: Number.isFinite(v.book) ? v.book : 9999 });
+                orderByName.set(name, Number.isFinite(v.book) ? v.book : 9999);
+            }
+
+            const entry = byBook.get(name);
+            const chapIdx = (v.chapter || 1) - 1;
+            const verseIdx = (v.verse || 1) - 1;
+
+            if (!entry.chapters[chapIdx]) entry.chapters[chapIdx] = [];
+            entry.chapters[chapIdx][verseIdx] = v.text || '';
+        });
+
+        // Normaliza: preenche buracos com string vazia e garante arrays compactos
+        for (const entry of byBook.values()) {
+            entry.chapters = entry.chapters.map(cap => {
+                const max = (cap && cap.length) ? cap.length : 0;
+                const out = new Array(max);
+                for (let i = 0; i < max; i++) out[i] = cap[i] ?? '';
+                return out;
+            });
+        }
+
+        // Retorna ordenado pelo índice numérico do livro
+        return Array.from(byBook.values())
+            .sort((a, b) => (a._order || 9999) - (b._order || 9999))
+            .map(({ _order, ...rest }) => rest);
+    }
+
+    // =========================
+    // Carregamento do RA (substitui a função atual)
+    // =========================
+    async function loadBibliaData() {
+        try {
+            // IMPORTANTISSIMO: mantenha "almeida_ra.json" na mesma pasta deste HTML
+            const response = await fetch('almeida_ra.json', { cache: 'no-store' });
+            if (!response.ok) throw new Error('Erro ao carregar arquivo da Bíblia (almeida_ra.json)');
+            const ra = await response.json();
+
+            // Converte verses[] -> livrosFlat que o app já usa
+            const livrosFlat = buildIndexFromRA(ra); // [{ name, chapters: [...] }]
+
+            // Detecta início do NT: procura "Mateus"; se não achar, usa fallback 39
+            let ntStart = livrosFlat.findIndex(b => (b.name || '').toLowerCase() === 'mateus');
+            if (ntStart < 0) ntStart = 39;
+
+            bibliaIndex.antigoTestamento = livrosFlat.slice(0, ntStart);
+            bibliaIndex.novoTestamento   = livrosFlat.slice(ntStart);
+
+            // Testamento inicial
+            const tURL = state.testamento;
+            if (!tURL || !bibliaIndex[tURL] || bibliaIndex[tURL].length === 0) {
+                state.testamento = bibliaIndex.antigoTestamento.length ? 'antigoTestamento' : 'novoTestamento';
+            }
+
+            hideLoading();
+            await loadLivros();
+            renderAll();
+        } catch (error) {
+            showError('Erro ao carregar a Bíblia: ' + error.message);
+            hideLoading();
+        }
+    }
+</script>
+</body>
+
+</html>
