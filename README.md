@@ -1,8 +1,5 @@
 # 📖 Bíblia Online
 
-[](https://opensource.org/licenses/MIT)
-[](https://github.com/AlanMartines/bibliasemfronteiras.git)
-
 Este projeto é uma plataforma web que reúne diferentes traduções da **Bíblia Sagrada em Português**, oferecendo uma interface simples, responsiva e elegante para leitura, pesquisa e navegação.
 
 <a href="[https://www.bibliasemfronteiras.com.br/](https://www.bibliasemfronteiras.com.br/)" target="_blank">Ver Demonstração Online</a>
